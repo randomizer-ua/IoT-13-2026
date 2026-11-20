@@ -5,12 +5,10 @@ class PlanetType(Enum):
     JOVIAN = "Jovian"
 
 class Planet:
-
-    bbb = "bbbbb"
-
     """
     Represents a planet and its main physical characteristics.
     """
+
     def __init__(
         self,
         name,
@@ -22,8 +20,6 @@ class Planet:
         planet_type,
         ):
 
-
-        Planet.bbb = 124
         self.name = name
         self.mass_in_kg = mass_in_kg
         self.orbital_velocity = orbital_velocity
@@ -32,9 +28,7 @@ class Planet:
         self.distance_from_sun = distance_from_sun
         self.planet_type = planet_type
 
-    @staticmethod
-    def print_smth():
-        print ("smth")
+
 
     def get_name(self):
         return self.name
@@ -57,12 +51,15 @@ class Planet:
     def get_planet_type(self):
         return self.planet_type
 
-    
-
     def __str__(self):
-        return (f"Planet: {self.name} | Mass: {self.mass_in_kg} | Orbital Velocity: {self.orbital_velocity} | "
-                f"Mean Temperature: {self.mean_temperature} | Length of Day: {self.length_of_day} | Distance from Sun: {self.distance_from_sun} | "
-                f"Type: {self.planet_type.value}")
+        return (
+            f"Planet: {self.name} | Mass: {self.mass_in_kg} | "
+            f"Orbital Velocity: {self.orbital_velocity} | "
+            f"Mean Temperature: {self.mean_temperature} | "
+            f"Length of Day: {self.length_of_day} | "
+            f"Distance from Sun: {self.distance_from_sun} | "
+            f"Type: {self.planet_type.value}"
+        )
 
     def __repr__(self):
         return (
@@ -96,17 +93,14 @@ class Planetary:
             key=lambda planet: planet.length_of_day
         )
 
-    def findAverageMass(self, planets=None):
+    def find_average_mass(self, planets=None):
         if planets is None:
             planets = self.__planets
 
-        if len(planets) == 0:
+        if not planets:
             return 0
 
-        total_mass = sum(
-            planet.mass_in_kg for planet in planets
-        )
-
+        total_mass = sum(planet.mass_in_kg for planet in planets)
         return total_mass / len(planets)
 
 
@@ -166,15 +160,12 @@ def main():
 
     print(f"Distance difference: {findDistanceBetween(earth, mars):.2f} million km")
 
-    average_all = solar_system.findAverageMass()
-    average_selected = solar_system.findAverageMass([mars, earth])
+    average_all = solar_system.find_average_mass()
+    average_selected = solar_system.find_average_mass([mars, earth])
 
     print(f"Average mass (all): {average_all:.3e} kg")
     print(f"Average mass (Mars & Earth): {average_selected:.3e} kg")
 
     print(earth.mass_in_kg)
-    print(Planet.bbb)
-
-    Planet.print_smth()
 
 main()
